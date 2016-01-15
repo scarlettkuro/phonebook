@@ -26,7 +26,7 @@ class UserStorage {
 		return $user;
 	}
 	
-	// public 
+	// public CRUD
 	
 	//return user with id as object
 	
@@ -103,6 +103,20 @@ class UserStorage {
 		$db = self::load();
 		unset($db['users'][$id]);
 		self::save($db);
+	}
+	
+	
+	//other services
+		
+	static function searchByName($name) {
+		$db = self::load();
+		$json_users = $db['users'];
+		//find user
+		foreach($json_users as $json_user)		
+			if ($json_user['name'] == $name)
+				return self::getUserFromJSON($json_user);
+			
+		return null;
 	}
 	
 }

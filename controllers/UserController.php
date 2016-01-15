@@ -15,7 +15,7 @@ class UserController {
 		$user = new User();
 		$user->setName("dont give a shit");
 		$user->setPhoneNumber("");
-		return json(UserStorage::createUser($user));
+		UserStorage::createUser($user);
 	}
 		
 	static function put($id) {
@@ -23,15 +23,15 @@ class UserController {
 		$user->setID($id);
 		$user->setName("NEW " . $id);
 		$user->setPhoneNumber("");
-		return json(UserStorage::updateUser($user));
+		UserStorage::updateUser($user);
 	}
 		
 	static function remove($id) {
-		return "delete";
+		UserStorage::removeUser($id);
 	}
 		
 	static function search($name) {
-		return "delete";
+		return json(UserStorage::searchByName($name));
 	}
 }
 
