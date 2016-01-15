@@ -1,12 +1,16 @@
 <?php
 
-class PhoneNumber implements JsonSerializable {
+class User implements JsonSerializable {
 	
     private $id;
     private $name;
     private $phoneNumber;
     
-    function __construct($id) {
+    function __construct() {
+        return $this->id = $id;
+    }
+    
+    public function setID($id) {
         return $this->id = $id;
     }
     
@@ -30,11 +34,11 @@ class PhoneNumber implements JsonSerializable {
         return $this->name = $name;
     }
 	
-		public function jsonSerialize() {
-				return array(
-						'id' => $this->id,
-						'name' => $this->name,
-						'phoneNumber' => $this->phoneNumber
-				);
-		}
+	public function jsonSerialize() {
+			return array(
+					'id' => $this->id,
+					'name' => $this->name,
+					'phoneNumber' => $this->phoneNumber
+			);
+	}
 }

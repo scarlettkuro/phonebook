@@ -9,19 +9,18 @@
   </head>
   <body>
 		<div class = "container">
-			<form action = "/test" method = "GET">
+			<form action = "/api/users" method = "GET">
 				<button type="submit" class="btn btn-primary">GET</button>
-				<input type="hidden" name="_method" value="GET"/>
 			</form>
-			<form action = "/test" method = "POST">
+			<form action = "/api/users" method = "POST">
 				<button type="submit" class="btn btn-primary">POST</button>
 				<input type="hidden" name="_method" value="POST"/>
 			</form>
-			<form action = "/test" method = "POST">
+			<form action = "/api/users/2" method = "POST">
 				<button type="submit" class="btn btn-primary">PUT</button>
 				<input type="hidden" name="_method" value="PUT"/>
 			</form>
-			<form action = "/test" method = "POST">
+			<form action = "/api/users" method = "POST">
 				<button type="submit" class="btn btn-primary">DELETE</button>
 				<input type="hidden" name="_method" value="DELETE"/>
 			</form>
