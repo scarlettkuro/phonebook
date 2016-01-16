@@ -20,6 +20,13 @@
 		  </div>
 		  <button ng-click="createUser()" class="btn btn-default">Add</button>
 		</form>
+		<form class="form-inline">
+		  <div class="form-group">
+			<label for="name">Name</label>
+			<input ng-model = "search_name" type="text" class="form-control" id="name" placeholder="Jane Doe">
+		  </div>
+		  <button ng-click="searchUser()" class="btn btn-default">Search</button>
+		</form>
 		<table class="table table-striped">
 			<tr>
 				<th>#</th>

@@ -46,6 +46,13 @@ app.controller('UserController', function($scope, $http) {
 		});
 	};
 	
+	$scope.searchUser = function() {
+		var promise = userStorage.searchUser($scope.search_name);
+		promise.success(function(data) {
+			$scope.users = [data];
+		});
+	};
+	
 	$scope.getUsers();
 	
 });

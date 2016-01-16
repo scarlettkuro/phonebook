@@ -1,5 +1,10 @@
 <?php
 
+/*
+	Simple repository based on json
+	Can be simply replaced with any db storage
+*/
+
 class UserStorage {
 	
 	//path to json storage

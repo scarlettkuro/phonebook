@@ -26,6 +26,8 @@ function emulateRequest(req) {
 					
 function UserStorage ($http) {
 	
+	//CRUD
+	
 	this.getUsers = function() {
 		return $http(emulateRequest({
 			url: "/api/users",
@@ -58,6 +60,16 @@ function UserStorage ($http) {
 		return $http(emulateRequest({
 			url: "/api/users/" + id,
 			method: "DELETE"
+		}));
+	};
+	
+	//Services
+	
+	
+	this.searchUser = function(name) {
+		return $http(emulateRequest({
+			url: "/api/users/search/" + name,
+			method: "GET"
 		}));
 	};
 }
