@@ -2,6 +2,15 @@ var app = angular.module('App',[]);
 
 app.controller('UserController', function($scope, $http) {
 	
+	$scope.edit = false;
+	$scope.onEdit = function (user, edit) {
+		if (edit == true) {
+			//	alert(user.name);
+			$scope.updateUser(user);
+		}
+		return !edit;
+	};
+	
 	$scope.users = []; //array for view table
 	
 	//repository for users
@@ -9,23 +18,30 @@ app.controller('UserController', function($scope, $http) {
 	
 	$scope.createUser = function() {
 		var user = {"name": $scope.new_name, "phoneNumber" : $scope.new_phoneNumber};
-		userStorage.createUser(user);
-		$scope.getUsers();
+		var promise = userStorage.createUser(user);
+		promise.success(function(data) {
+			$scope.getUsers();
+		});
+		
 	};
 	
-	$scope.updateUser = function() {
-		var user = {"name": $scope.new_name, "phoneNumber" : $scope.new_phoneNumber};
-		userStorage.updateUser(user);
-		$scope.getUsers();
+	$scope.updateUser = function(user) {
+		var promise = userStorage.updateUser(user);
+		promise.success(function(data) {
+			$scope.getUsers();
+		});
 	};
 	
 	$scope.removeUser = function(id) {
-		userStorage.removeUser(id);
-		$scope.getUsers();
+		var promise = userStorage.removeUser(id);
+		promise.success(function(data) {
+			$scope.getUsers();
+		});
 	};
 	
 	$scope.getUsers = function() {
-		userStorage.getUsers(function (data) {
+		var promise = userStorage.getUsers();
+		promise.success(function(data) {
 			$scope.users = data;
 		});
 	};

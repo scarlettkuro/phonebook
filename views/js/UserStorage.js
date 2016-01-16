@@ -1,64 +1,63 @@
 /*
 	AJAX repository based on Angular $http
 	
-	clientSuccess | clientError - a user of object
-	can it's own callbacks for each action
+	_method emulation 
+	
+	each method return a promise of action
 */
+
+function serializeData(obj) {
+	var str = [];
+	for(var p in obj)
+		if (obj.hasOwnProperty(p)) 
+			str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+	
+	return str.join("&");
+}
+
+function emulateRequest(req) {
+	req.headers = { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
+	if (req.method != "GET") {
+		req.data = serializeData({'data' : JSON.stringify(req.data) , '_method' : req.method});
+		req.method = "POST";
+	}
+	return req;
+}
+					
 function UserStorage ($http) {
 	
-	this.getUsers = function(clientSuccess, clientError) {
-		$http({
+	this.getUsers = function() {
+		return $http(emulateRequest({
 			url: "/api/users",
 			method: "GET"
-		}).success(function(data, status, headers, config) {
-			clientSuccess(data, status, headers, config);
-		}).error(function(data, status, headers, config) {
-			this.status = status;
-			clientError(data, status, headers, config);
-		});
+		}));
 	};
-	this.getUser = function(id, clientSuccess, clientError) {
-		$http({
+	this.getUser = function(id) {
+		return $http(emulateRequest({
 			url: "/api/users/" + id,
 			method: "GET"
-		}).success(function(data, status, headers, config) {
-			clientSuccess(data, status, headers, config);
-		}).error(function(data, status, headers, config) {
-			clientError(data, status, headers, config);
-		});
+		}));
 	};
 	
-	this.createUser = function(user, clientSuccess, clientError) {
-		$http({
+	this.createUser = function(user) {
+		return $http(emulateRequest({
 			url: "/api/users",
 			method: "POST",
 			data: user
-		}).success(function(data, status, headers, config) {
-			clientSuccess(data, status, headers, config);
-		}).error(function(data, status, headers, config) {
-			clientError(data, status, headers, config);
-		});
+		}));
 	};
-	this.updateUser = function(user, clientSuccess, clientError) {
-		$http({
+	this.updateUser = function(user) {
+		return $http(emulateRequest({
 			url: "/api/users/" + user.id,
 			method: "PUT",
 			data: user
-		}).success(function(data, status, headers, config) {
-			clientSuccess(data, status, headers, config);
-		}).error(function(data, status, headers, config) {
-			clientError(data, status, headers, config);
-		});
+		}));
 	};
 	
-	this.removeUser = function(id, clientSuccess, clientError) {
-		$http({
+	this.removeUser = function(id) {
+		return $http(emulateRequest({
 			url: "/api/users/" + id,
 			method: "DELETE"
-		}).success(function(data, status, headers, config) {
-			clientSuccess(data, status, headers, config);
-		}).error(function(data, status, headers, config) {
-			clientError(data, status, headers, config);
-		});
+		}));
 	};
 }

@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>REST Test</title>
+    <title>REST PhoneBook</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
   </head>
   <body>
@@ -28,10 +28,20 @@
 				<th></th>
 			</tr>
 			<tr ng-repeat = "user in users">
-				<td>{{user.id}}</td>
-				<td>{{user.name}}</td>
-				<td>{{user.phoneNumber}}</td>
-				<td><span ng-click="removeUser(user.id)" class="btn glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+				<td>
+					{{user.id}}
+					<span ng-click = "edit = onEdit(user, edit)" class="btn glyphicon glyphicon-pencil" aria-hidden="true"></span>
+				</td>
+				<td>
+					<span ng-hide = "edit" >{{user.name}}</span>
+					<input ng-show = "edit"  ng-model = "user.name" type="text" class="form-control" id="name">
+				</td>
+				<td>
+					<span ng-hide = "edit" >{{user.phoneNumber}}</span>
+					<input ng-show = "edit"  ng-model = "user.phoneNumber" type="text" class="form-control" id="phoneNumber">
+				</td>
+				<td>
+					<span ng-click="removeUser(user.id)" class="btn glyphicon glyphicon-remove" aria-hidden="true"></span></td>
 			</tr>
 		</table>
 	</div>

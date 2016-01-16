@@ -12,7 +12,7 @@ class UserController {
 	}
 		
 	static function post() {
-		$json_user = json_decode(file_get_contents('php://input'));
+		$json_user = json_decode($_POST['data'], true);
 		$user = new User();
 		$user->setName($json_user['name']);
 		$user->setPhoneNumber($json_user['phoneNumber']);
@@ -20,10 +20,11 @@ class UserController {
 	}
 		
 	static function put($id) {
+		$json_user = json_decode($_POST['data'], true);
 		$user = new User();
 		$user->setID($id);
-		$user->setName("NEW " . $id);
-		$user->setPhoneNumber("");
+		$user->setName($json_user['name']);
+		$user->setPhoneNumber($json_user['phoneNumber']);
 		UserStorage::updateUser($user);
 	}
 		
