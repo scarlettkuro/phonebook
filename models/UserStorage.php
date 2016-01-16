@@ -101,7 +101,10 @@ class UserStorage {
 	
 	static function removeUser($id) {
 		$db = self::load();
-		unset($db['users'][$id]);
+		foreach($db['users'] as $index=>$json_user)
+			if ((int)$json_user['id'] == $id)
+				unset($db['users'][$index]);
+				
 		self::save($db);
 	}
 	

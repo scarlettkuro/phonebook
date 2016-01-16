@@ -12,9 +12,10 @@ class UserController {
 	}
 		
 	static function post() {
+		$json_user = json_decode(file_get_contents('php://input'));
 		$user = new User();
-		$user->setName("dont give a shit");
-		$user->setPhoneNumber("");
+		$user->setName($json_user['name']);
+		$user->setPhoneNumber($json_user['phoneNumber']);
 		UserStorage::createUser($user);
 	}
 		
