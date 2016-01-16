@@ -9,25 +9,25 @@
   </head>
   <body>
 	<div class = "container" ng-controller="UserController">
-		<form class="form-inline">
-		  <div class="form-group">
-			<label for="name">Name</label>
-			<input ng-model = "new_name" type="text" class="form-control" id="name" placeholder="Jane Doe">
-		  </div>
-		  <div class="form-group">
-			<label for="phoneNumber">Phone</label>
-			<input ng-model = "new_phoneNumber" type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
-		  </div>
-		  <button ng-click="createUser()" class="btn btn-default">Add</button>
-		</form>
-		<form class="form-inline">
-		  <div class="form-group">
-			<label for="name">Name</label>
-			<input ng-model = "search_name" type="text" class="form-control" id="name" placeholder="Jane Doe">
-		  </div>
-		  <button ng-click="searchUser()" class="btn btn-default">Search</button>
-		</form>
+	
+		<div class="row marketing">
+        <div class="col-lg-8 col-lg-offset-2">
+		<div class="jumbotron">
+			<h1>Phonebook</h1>
+			<form class="form-inline">
+			  <div class="form-group">
+				<input ng-model = "search_name" type="text" class="form-control" placeholder="Jane Doe">
+			  </div>
+			  <button ng-click="searchUser()" class="btn btn-default">Search</button>
+			</form>
+		</div> 
 		<table class="table table-striped">
+			<tr>
+				<td></td>
+				<td><input ng-model = "new_name" type="text" class="form-control" id="name" placeholder="Jane Doe"></td>
+				<td><input ng-model = "new_phoneNumber" type="text" class="form-control" id="phoneNumber" placeholder="Phone Number"></td>
+				<td><button ng-click="createUser()" class="btn btn-default">Add</button></td>
+			</tr>
 			<tr>
 				<th>#</th>
 				<th>Name</th>
@@ -51,6 +51,8 @@
 					<span ng-click="removeUser(user.id)" class="btn glyphicon glyphicon-remove" aria-hidden="true"></span></td>
 			</tr>
 		</table>
+		</div> 
+		</div> 
 	</div>
 	
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
