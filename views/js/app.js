@@ -3,9 +3,10 @@ var app = angular.module('App',[]);
 app.controller('UserController', function($scope, $http) {
 	
 	$scope.edit = false;
+	$scope.search_status = "";
+	
 	$scope.onEdit = function (user, edit) {
 		if (edit == true) {
-			//	alert(user.name);
 			$scope.updateUser(user);
 		}
 		return !edit;
@@ -47,9 +48,18 @@ app.controller('UserController', function($scope, $http) {
 	};
 	
 	$scope.searchUser = function() {
+			
 		var promise = userStorage.searchUser($scope.search_name);
+					
 		promise.success(function(data) {
-			$scope.users = [data];
+			if (data) {
+				$scope.search_status = "";
+				$scope.users = [data];
+			}
+			else {
+				$scope.search_status = "Not found";
+				$scope.getUsers();
+			}
 		});
 	};
 	

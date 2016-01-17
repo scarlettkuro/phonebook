@@ -19,6 +19,7 @@
 				<input ng-model = "search_name" type="text" class="form-control" placeholder="Jane Doe">
 			  </div>
 			  <button ng-click="searchUser()" class="btn btn-default">Search</button>
+			  <span>{{search_status}}</span>
 			</form>
 		</div> 
 		<table class="table table-striped">
